@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+       Try this page out at:    https://keen-blender.glitch.me/
+
+       See the comments at the top of the:   dateTimeCtrl_plain.js     
+       file for a lot more information...
+
+       Generating control on this page is not automatic 
+       just to make my debugging easier!
+
+      -->
+    <title>Date/Time Control Experiments!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    
+    
+  </head>  
+  <body>
+    <h1>Sample Date Time Control</h1>
+    <p>      
+    Uses 'onclick=' attribute on button tag instead of btnNd.addEventListener()
+      in JavaScript code.
+    </p>
+    <p>
+      Not as sexy, but it can work with more legacy code without a lot of refactoring.
+    </p>
+    
+    <div id="sampleCtrl"></div>
+    <hr>
+    <button id="btn" onclick="genCtrl()">Gen Ctrl</button>
+    
+    <!-- <script src="./dateTimeCtrl_plain.js"></script> -->
+    <script src="https://orvillechomer.github.io/dateTimeCtrl_OldSchool/dateTimeCtrl_plain.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
+
