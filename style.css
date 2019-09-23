@@ -1,0 +1,49 @@
+/* CSS files add styling rules to your content */
+
+body {
+  /* font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif; */
+  margin: 2em;
+  overflow:hidden;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+
+
+input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.lblApptDate {
+  position:absolute;
+  left:20px;
+  top:280px;
+}
+
+.inpApptDate {
+  position:absolute;
+  left:160px;
+  top:275px;
+  width:230px;
+}
+
+.lblPrefillDate {
+  position:absolute;
+  left:20px;
+  top:320px;
+}
+
+.inpPrefillDate {
+  position:absolute;
+  left:160px;
+  top:315px;
+  width:230px;
+}
