@@ -57,7 +57,7 @@
  ****************************************************************************************************************/
 
 const gblDateCtrlInfoByFieldName = [];
-const gblDateCtrlInfoByIndex = [];
+let gblDateCtrlInfoByIndex = [];
 const gblDateCtrlState = {};
 
 
