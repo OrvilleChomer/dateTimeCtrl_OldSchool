@@ -299,13 +299,18 @@ const gblDateCtrlState = {};
             sMsg.push("Invalid minute value. (Needs to be between 00 and 59)");
           } // end if
           
-          if (sAMPM === "PM") {
+          if (sAMPM === "AM" && nHours===12) {
+            nHours = 0; // 12 AM (midnight)
+          } // end if
+          
+          if (sAMPM === "PM" & nHours < 12) {
             nHours = nHours + 12; // convert 12 hour time into 24 hour time that date variable uses
           } // end if
           
-          nHours = nHours - 1; // since a date variable has hours as base 0 though visually it is base 1!
+          
           selDate.setHours(nHours);
           selDate.setMinutes(nMinutes);
+          selDate.setSeconds(0); // get rid of any seconds
         } // end if
         
         if (sMsg.length > 0) {
@@ -314,7 +319,7 @@ const gblDateCtrlState = {};
           alert(sMsg.join("\n"));
           return;
         } // end if
-        
+       
         ctrl.selDate = selDate;
         ctrl.dateValue = selDate + ""; // date value cast as a string
         ctrl.pendingSelDate = undefined;
@@ -660,7 +665,7 @@ const gblDateCtrlState = {};
           s.push("<span class='calAt' ");
           s.push(">@</span>");
 
-          let nHours = pickDate.getHours()+1;
+          let nHours = pickDate.getHours();
           let sAMSelected = " selected";
           let sPMSelected = "";
           let sMinutes = pickDate.getMinutes()+"";
@@ -669,14 +674,18 @@ const gblDateCtrlState = {};
             sMinutes = "0"+sMinutes;
           } // end if
 
-          if (nHours > 12) {
-            nHours = nHours - 12;
+          if (nHours > 11) {            
             sAMSelected = "";
             sPMSelected = " selected";
+            if (nHours > 12) {           
+              nHours = nHours - 12;
+            } // end if
           } // end if
           
+          if (nHours === 0) {   
+            nHours = 12;  // 12 AM
+          } // end if
           
-
           s.push("<input id='calHourEntry' value='"+(nHours)+"' maxlength='2' ");
           s.push(">");
 
@@ -863,6 +872,7 @@ const gblDateCtrlState = {};
     pendingSelDate.setFullYear(nYear);
     pendingSelDate.setHours(pickDate.getHours());
     pendingSelDate.setMinutes(pickDate.getMinutes());
+    pendingSelDate.setSeconds(0); // get rid of any seconds
     ctrl.pendingSelDate = pendingSelDate;
     ctrl.pendingSelDatePicked = true;
     
@@ -985,11 +995,18 @@ const gblDateCtrlState = {};
     ****************************************************************************/     
     function formattedTime(dt) {
       let sAMPM = " AM";
-      let nHour = dt.getHours()+1;
+      let nHour = dt.getHours();
       
-      if (nHour > 12) {
-        nHour = nHour - 12;
+      if (nHour > 11) {
         sAMPM = " PM";
+        
+        if (nHour > 12) {
+          nHour = nHour - 12;
+        } // end if
+      } // end if
+      
+      if (nHour === 0) {
+        nHour = 12; // 12 AM (midnight)
       } // end if
       
       let sMinutes = dt.getMinutes()+"";
@@ -1586,8 +1603,8 @@ const gblDateCtrlState = {};
       const calAmPmSelectNd = document.getElementById("calAmPmSelect");
       
       ctrl.pendingSelHour = calHourEntryNd.value;
-      ctrl.pendingSelMinute = calHourEntryNd.value;
-      ctrl.pendingSelAmPm = calHourEntryNd.value;
+      ctrl.pendingSelMinute = calMinuteEntryNd.value;
+      ctrl.pendingSelAmPm = calAmPmSelectNd.value;
     } // end of function savePendingSelTime() 
     
     
